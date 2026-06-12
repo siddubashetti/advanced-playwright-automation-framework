@@ -159,6 +159,7 @@ test("Create User API Test", async ({ request }) => {
   const responseBody = await response.json();
   expect(responseBody.name).toBe("Siddaram");
 });
+ ```
 
 ▶️ How to Run
 npm install
