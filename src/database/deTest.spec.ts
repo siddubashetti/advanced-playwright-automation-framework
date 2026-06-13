@@ -6,7 +6,7 @@ const sqlQueries = new SQLQUERIES();
 
 
 
-test.describe('Database Tests', () => {
+test.describe.serial('Database Tests', () => {
     test.beforeAll(async () => {
         const conn = await connection.getConnection();
         await conn.ping();

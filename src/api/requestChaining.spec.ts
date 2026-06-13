@@ -1,6 +1,6 @@
 import { test, expect } from "playwright/test"
 
-test.describe("Request chaining Tests", () => {
+test.describe.serial("Request chaining Tests", () => {
     // Create a new user and use the userId for subsequent requests
     test("Chaining API Requests", async ({ request }) => {
         // Step 1: Create a new user

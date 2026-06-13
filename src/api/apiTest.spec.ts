@@ -1,6 +1,6 @@
 import { test, expect } from "playwright/test";
 
-test.describe("API Tests", () => {
+test.describe.serial("API Tests", () => {
     // Basic API tests for GET and validating the response body
     test("GET Request Test", async ({ request }) => {
         const response = await request.get("https://reqres.in/api/users", {

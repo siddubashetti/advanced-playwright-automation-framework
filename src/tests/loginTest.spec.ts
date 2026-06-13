@@ -1,7 +1,7 @@
 import { test, expect } from "../fixtures/baseFixture";
 import { LoginPage } from "../pages/LoginPage";
 
-test.describe("Login Tests", async () => {
+test.describe.serial("Login Tests", async () => {
     // Initialize the LoginPage object as a beforeEach test
     test.beforeEach(async ({ loginPage }) => {
         await loginPage.navigateToLoginPage();
