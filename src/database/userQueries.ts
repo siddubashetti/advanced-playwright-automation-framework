@@ -53,14 +53,42 @@ export class SQLQUERIES {
         return result;
     }
 
-    // Delete a student from database
-    async deleteStudent(rollno: number) {
+    // Before Delete a student from database add it once again to maintain the data integrity
+    async addStudent(rollno: number, name: string) {
         const [result] = await connection.execute(
-            'DELETE FROM student WHERE rollno = ?',
-            [rollno]
+            'INSERT INTO student (rollno, name) VALUES (?, ?)',
+            [rollno, name]
         );
         return result;
     }
+
+    async deleteStudent(rollno: number) {
+        try {
+            const [result] = await connection.execute(
+                'DELETE FROM student WHERE rollno = ?',
+                [rollno]
+            );
+            return result;
+        } catch (error) {
+            console.error("DB Delete Error:", error);
+            throw error;
+        }
+    }
+
+
+
+    async verifyDbConnection() {
+        try {
+            const [rows] = await connection.query('SELECT 1');
+            console.log('Database Connected Successfully');
+            console.log(rows);
+        } catch (error) {
+            console.error('Database Connection Failed:', error);
+            throw error;
+        }
+    }
+
+
 }
 
 

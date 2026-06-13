@@ -1,9 +1,19 @@
 import { test, expect } from '@playwright/test';
 import { SQLQUERIES } from './userQueries';
+import { connection } from './dbConnection';
 
 const sqlQueries = new SQLQUERIES();
 
+
+
 test.describe('Database Tests', () => {
+    test.beforeAll(async () => {
+        const conn = await connection.getConnection();
+        await conn.ping();
+        conn.release();
+        const isConnected = await sqlQueries.verifyDbConnection();
+        expect(isConnected).toBe(true);
+    });
     // Get user by name from database and validating the response
     test('Get user by name from database', async () => {
         const student: any = await sqlQueries.getUserByName('anil');
@@ -62,8 +72,13 @@ test.describe('Database Tests', () => {
 
     // Delete a student from database and validating the response
     test("delete a student from database", async () => {
+        const student: any = await sqlQueries.addStudent(109, 'siddu');
         const result: any = await sqlQueries.deleteStudent(109);
         console.log(result);
         expect(result.affectedRows).toBe(1);
     })
 })
+
+
+
+
