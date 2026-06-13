@@ -77,14 +77,15 @@ export class SQLQUERIES {
 
 
 
-    async verifyDbConnection() {
+    async verifyDbConnection(): Promise<boolean> {
         try {
             const [rows] = await connection.query('SELECT 1');
             console.log('Database Connected Successfully');
             console.log(rows);
+            return true;
         } catch (error) {
             console.error('Database Connection Failed:', error);
-            throw error;
+            return false;
         }
     }
 
