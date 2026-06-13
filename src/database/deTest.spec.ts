@@ -19,7 +19,6 @@ test.describe.serial('Database Tests', () => {
         const student: any = await sqlQueries.getUserByName('anil');
         console.log(student);
 
-        expect(student.length).toBeGreaterThan(0);
         expect(student[0].name).toBe('anil');
         expect(student[0]).toHaveProperty('rollno', 101);
         expect(student[0]).toHaveProperty('city', 'Pune');

@@ -1,6 +1,6 @@
 import { expect, test } from "../fixtures/baseFixture.ts";
 
-test.describe.serial("Basic Operations Tests", async () => {
+test.describe("Basic Operations Tests", async () => {
     //fileUploadTest 
     test("File Upload Test", async ({ fileUploadPage, }) => {
 
