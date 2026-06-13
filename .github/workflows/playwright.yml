@@ -62,12 +62,19 @@ jobs:
         run: |
           mysql -h127.0.0.1 -u root -pRoot@123 -e "SHOW DATABASES;"
 
+      - name: Create Database Schema
+        run: |
+          mysql -h127.0.0.1 \
+          -u root \
+          -pRoot@123 \
+          college1 < schema.sql
+
       - name: Run Playwright tests
         env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOST: 127.0.0.1
+          DB_USER: root
+          DB_PASSWORD: Root@123
+          DB_NAME: college1
         run: npx playwright test
 
       - uses: actions/upload-artifact@v4

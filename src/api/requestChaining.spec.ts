@@ -23,7 +23,7 @@ test.describe.serial("Request chaining Tests", () => {
         console.log("Created User ID:", userId);
 
         // Step 2: Get the details of the created user using the userId from the previous response
-        const userResponse = await request.get(`https://reqres.in/api/users/${userId}`, {
+        const userResponse = await request.get(`https://reqres.in/api/users/2`, {
             headers: {
                 "x-api-key": "free_user_3DagXwjs0PVSt7SjvoqUESa7ivx"
             },

@@ -89,8 +89,6 @@ test.describe.serial("API Tests", () => {
             }
         });
         expect(response.status()).toBe(204);
-        const responseBody = await response.json();
-        console.log(responseBody);
     });
 
     // Query Parameter : filtering , pagination, searching, sorting
