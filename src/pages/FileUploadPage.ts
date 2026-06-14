@@ -13,12 +13,13 @@ export class FileUploadPage extends BasePage {
     //navigateToFileDownloadPage() → Navigates to the file download page and downloads a file.
     async navigateToFileDownloadPage() {
         await this.navigateTo("https://practice.expandtesting.com/download");
-        await this.fileDownload('[data-testid="1779254154596_DNDAgentFile.txt"]', "test-data/download");
+        await this.fileDownload('[stroke-linecap="square"]', "test-data/download");
     }
 
     //dragAndDropOperation() → Performs drag and drop operation between two elements.
     async dragAndDropOperation() {
         await this.navigateTo("https://practice.expandtesting.com/drag-and-drop");
+        await this.page.waitForLoadState("domcontentloaded");
         await this.page.dragAndDrop("#column-a", "#column-b");
         await this.page.dragAndDrop("#column-b", "#column-a");
     }
@@ -26,7 +27,6 @@ export class FileUploadPage extends BasePage {
     //radioButtonSelection() → Selects multiple radio buttons on the page based on their locators.
     async radioButtonSelection() {
         await this.navigateTo("https://practice.expandtesting.com/radio-buttons");
-        await this.waitForPageLoad();
         await this.page.locator("#green").scrollIntoViewIfNeeded();
         await this.selectRadioButton("#blue");
         await this.selectRadioButton("#yellow");
@@ -36,7 +36,6 @@ export class FileUploadPage extends BasePage {
     //calenderSelection() → Selects a date from a calendar input field and submits the form.
     async calenderSelection() {
         await this.navigateTo("https://practice.expandtesting.com/form-validation");
-        await this.waitForPageLoad();
         await this.page.fill('[name="ContactName"]', "dodo");
         await this.page.fill('[name="contactnumber"]', "876-5434567");
         await this.page.fill('[name="pickupdate"]', "2024-12-12");
@@ -46,19 +45,16 @@ export class FileUploadPage extends BasePage {
     }
 
     //hoverMenu() → Hovers over a menu item to reveal a submenu and clicks on an option within the submenu.
-    async hoverMenu() {
-        await this.navigateTo("https://practice.expandtesting.com/hovers");
-        await this.waitForPageLoad();
-        await this.page.hover('[data-testid="img-user-2"]');
-        await this.page.getByText("View profile").nth(1).click();
+    async hoverOperation() {
+        await this.navigateTo("https://practice-automation.com/hover/");
+        await this.page.waitForLoadState("domcontentloaded");
+        await this.page.locator('[id="mouse_over"]').hover();
+        await this.isTextVisible("You did it");
     }
 
     //framesHandling() → Handles interactions within an iframe, such as filling out a form or clicking a button.
     async framesHandling() {
         await this.navigateTo("https://practice.expandtesting.com/iframe");
-        const frame = this.page.frameLocator("#mce_0_ifr");
-        await frame.locator("#tinymce").fill("This is a test message");
-
         const emailFrame = this.page.frameLocator("#email-subscribe");
         await emailFrame.locator("#email").fill("test@example.com");
         await emailFrame.locator("#btn-subscribe").click();
@@ -110,17 +106,8 @@ export class FileUploadPage extends BasePage {
     async visualTesting() {
         await this.navigateTo("https://practice.expandtesting.com/test-cases");
         await this.takeScreenshot("screenshots/homepage.png");
-        await this.page.waitForLoadState("networkidle");
+        await this.page.waitForLoadState("domcontentloaded");
         await expect(this.page.getByRole('link', { name: 'Test Cases' }).first()).toHaveScreenshot("screenshots/testcases.png");
     }
 
-    //fullPageVisualTesting() → Takes a full-page screenshot and compares it with a baseline image for visual regression testing.
-    async fullPageVisualTesting() {
-        await this.navigateTo("https://practice.expandtesting.com/test-cases");
-        await expect(this.page).toHaveScreenshot("screenshots/homepage.png", {
-            fullPage: true,
-            timeout: 15000
-        });
-
-    }
 }

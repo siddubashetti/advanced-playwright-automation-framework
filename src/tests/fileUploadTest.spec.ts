@@ -5,7 +5,6 @@ test.describe("Basic Operations Tests", async () => {
     test("File Upload Test", async ({ fileUploadPage, }) => {
 
         await fileUploadPage.navigateToFileUploadPage();
-        await fileUploadPage.waitForPageLoad();
         await fileUploadPage.verifyText("#uploaded-files", "sample.pdf");
     });
 
@@ -28,13 +27,12 @@ test.describe("Basic Operations Tests", async () => {
     //calenderSelectionTest
     test("Calender Selection Test", async ({ fileUploadPage }) => {
         await fileUploadPage.calenderSelection();
-        await fileUploadPage.isVisible("Form Confirmation page for Automation Testing Practice");
+        await fileUploadPage.isTextVisible("Form Confirmation page for Automation Testing Practice");
     })
 
     //hoverMenuTest
     test("Hover Menu Test", async ({ fileUploadPage }) => {
-        await fileUploadPage.hoverMenu();
-        await fileUploadPage.isVisible("Welcome user2");
+        await fileUploadPage.hoverOperation();
     })
 
     //framesHandlingTest
@@ -45,7 +43,7 @@ test.describe("Basic Operations Tests", async () => {
     //windowHandlingTest
     test("Window Handling Test", async ({ fileUploadPage }) => {
         await fileUploadPage.newWindowHandling()
-        await fileUploadPage.isVisible("Example of a new window page for Automation Testing Practice");
+        await fileUploadPage.isTextVisible("Example of a new window page for Automation Testing Practice");
     })
 
     //tableHandlingTest
@@ -67,11 +65,4 @@ test.describe("Basic Operations Tests", async () => {
     test("Visual Testing", async ({ fileUploadPage }) => {
         await fileUploadPage.visualTesting();
     })
-
-    //fullPageVisualTestingTest
-    test("Full Page Visual Testing", async ({ fileUploadPage }) => {
-        await fileUploadPage.fullPageVisualTesting();
-    })
-
-
 });

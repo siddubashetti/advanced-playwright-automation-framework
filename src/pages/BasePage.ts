@@ -35,7 +35,7 @@ export class BasePage {
     async fileDownload(locator: string, downloadPath: string) {
         const [download] = await Promise.all([
             this.page.waitForEvent("download"),
-            this.page.click(locator)
+            this.page.locator(locator).first().click()
         ])
         const fileName = download.suggestedFilename();
         await download.saveAs(`${downloadPath}/${fileName}`);
@@ -45,26 +45,21 @@ export class BasePage {
     async windowHandling(locator: string, url: string) {
         const [newWindow] = await Promise.all([
             this.page.waitForEvent("popup"),
-            this.page.click(locator)
+            this.page.locator(locator).click()
         ])
-        await newWindow.waitForLoadState();
+        await newWindow.waitForLoadState('load');
         await newWindow.goto(url);
 
     }
 
     //Radio Button() : selects a radio button based on the provided locator using check() method.
     async selectRadioButton(locator: string) {
-        await this.page.check(locator);
+        await this.page.locator(locator).check();
     }
 
     //dragAndDrop() → Drags an element and drops it onto another element.
     async dragAndDropOperation(sourceLocator: string, targetLocator: string) {
         await this.page.dragAndDrop(sourceLocator, targetLocator);
-    }
-
-    //getByText() → Gets element by text
-    async getByText(text: string) {
-        return this.page.isVisible(text);
     }
 
     //waitForElement() → Waits until element becomes visible.
@@ -75,9 +70,9 @@ export class BasePage {
     }
 
     //waitForPageLoad() → Waits until the page is fully loaded.
-    async waitForPageLoad() {
-        await this.page.waitForLoadState("load");
-    }
+    // async waitForPageLoad() {
+    //     await this.page.waitForLoadState("load");
+    // }
 
     //getText() → Gets the text content of an element.
     async getText(locator: string): Promise<string> {
@@ -85,7 +80,7 @@ export class BasePage {
     }
 
     //isVisible() → Checks if an element is visible.
-    async isVisible(locator: string): Promise<boolean> {
+    async isTextVisible(locator: string): Promise<boolean> {
         return await this.page.isVisible(locator);
     }
 
@@ -95,7 +90,7 @@ export class BasePage {
     }
 
     //hover() → Hovers over an element.
-    async hover(locator: string) {
+    async hoverMenu(locator: string) {
         await this.page.hover(locator);
     }
 

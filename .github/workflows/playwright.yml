@@ -77,6 +77,15 @@ jobs:
           DB_NAME: college1
         run: npx playwright test
 
+      - name: Generate Allure Report
+        run: npx allure generate allure-results --clean
+
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
+
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

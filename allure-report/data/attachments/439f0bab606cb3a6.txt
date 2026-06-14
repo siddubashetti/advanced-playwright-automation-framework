@@ -1,0 +1,16 @@
+[
+  {
+    rollno: 102,
+    name: 'bhumika',
+    marks: 93,
+    grade: 'A',
+    city: 'Mumbai'
+  },
+  {
+    rollno: 103,
+    name: 'chetan',
+    marks: 85,
+    grade: 'B',
+    city: 'Mumbai'
+  }
+]

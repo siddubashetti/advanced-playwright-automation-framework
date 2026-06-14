@@ -1,0 +1,3 @@
+Database Connected Successfully
+[ { '1': 1 } ]
+[ { rollno: 101, name: 'anil', marks: 78, grade: 'C', city: 'Pune' } ]
